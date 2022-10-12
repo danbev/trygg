@@ -2,6 +2,11 @@
 Trygg, safe in Swedish, is a tool to execute/evaluate policy rules in Rust.
 It does so by executing an OPA Policy that has been compiled to wasm.
 
+The motivation for using OPA's ability to compile policies into wasm is that
+same wasm policy can be used with Rust, Node.js, (and other wasm runtimes), and
+at the same wasm module can be used in a OPA server running somewhere as part of
+a CI/CD pipeline, or in a Kubernetes gatekeeper.
+
 ### Install OPA
 This step is only required if one wants to work with the OPA
 [policies](./policies) and rebuild wasm modules.
@@ -91,3 +96,22 @@ Options:
 ```
 This is not actually checking any dependencies (yet), but only evaluating the
 policy. It is just to try out the idea.
+
+### Goals/Questions
+
+#### How to we avoid another left-pad?
+In this case left-pad was removed from the npm repository. To avoid this we
+would need to host this module somewhere which I thought was something we
+wanted to avoid?
+
+#### How can I ensure I'm using a RHT-supported stack?
+In this case we are talking about software dependencies and that these are from
+the ones used are Red Hat supported versions.
+
+We could add `in-toto` to our dependencies and then create an OPA policy that
+checks that ones a project uses. This policy would be runnable on the command
+line and be able to integrate into the development workflow. 
+
+#### How can I avoid mixing incompatible licenses?
+Again, we could create another policy that checks this.
+
