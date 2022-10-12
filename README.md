@@ -2,6 +2,16 @@
 Trygg, safe in Swedish, is a tool to execute/evaluate policy rules in Rust.
 It does so by executing an OPA Policy that has been compiled to wasm.
 
+### Install OPA
+This step is only required if one wants to work with the OPA
+[policies](./policies) and rebuild wasm modules.
+
+```console
+$ cd policies
+$ curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.45.0/opa_linux_amd64
+$ chmod 744 opa
+```
+
 ### Polices
 The [polices](./polices) directory contains the polices that are used as
 examples, there is currently only one policy. This can tested and then built
