@@ -109,20 +109,26 @@ In this case we are talking about software dependencies and that these are Red
 Hat supported versions.
 
 We could add `in-toto` to our dependencies and then create an OPA policy that
-checks that ones a project uses. This policy would be runnable on the command
+checks the ones a project uses. This policy would be runnable on the command
 line and be able to integrate into the development workflow. 
 
 But adding `in-toto` to projects is probably not a small task and I'm assuming
 that there are many Red Hat projects which would require this. But if we can
 create a [in-toto layout](https://in-toto.engineering.nyu.edu/)  which might
-be general enough to be applicable to multiple projects, which might make this
-easier to do?
+be general enough to be applicable to multiple projects, that might make it
+easier?
 
 #### How can I avoid mixing incompatible licenses?
 Again, we could create another policy that checks this.
 
 #### What about other non-supported dependencies?
 It will/would be great if we use in-toto or something the verify that software
-coming from Red Hat can be verified as secure. But a large number of
-dependencies in a project will not come from Red Hat. Even if I as a user verify
-all of the Red Hat deps I'm still vulnerable software supply-chain attacks.
+coming from Red Hat is secure. But a large number of dependencies in a project
+will not come from Red Hat. Even if I as a user verify all of the Red Hat deps
+I'm still vulnerable software supply-chain attacks from other dependencies.
+
+Perhaps I'm being naive here but could we start helping open source projects,
+like the ones that are most used by our customers and help them setup in-toto
+or something else. I understand that this would cost us money but it would help
+our customers secure thier products and also might give a good amount of good
+will from the community.
