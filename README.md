@@ -18,7 +18,7 @@ $ chmod 744 opa
 ```
 
 ### Polices
-The [polices](./polices) directory contains the polices that are used as
+The [polices](./policies) directory contains the polices that are used as
 examples, there is currently only one policy. This can tested and then built
 into a wasm module using the following command:
 ```console
