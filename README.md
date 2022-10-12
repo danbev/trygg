@@ -87,5 +87,7 @@ Options:
   -i, --input <INPUT>  The input file in json format (optional)
   -d, --data <DATA>    The data file in json format (optional)
   -h, --help           Print help information
-  -V, --version        Print version informatio
+  -V, --version        Print version information
 ```
+This is not actually checking any dependencies (yet), but only evaluating the
+policy. It is just to try out the idea.
