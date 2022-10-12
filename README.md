@@ -1,8 +1,9 @@
 ## Trygg
 Trygg, safe in Swedish, is a tool to execute/evaluate policy rules in Rust.
 It does so by executing an OPA Policy that has been compiled to wasm.
+(Ignore the name, I just had to name it something).
 
-The motivation for using OPA's ability to compile policies into wasm is that
+The motivation for using OPA's ability to compile policies into wasm is that the
 same wasm policy can be used with Rust, Node.js, (and other wasm runtimes), and
 at the same wasm module can be used in a OPA server running somewhere as part of
 a CI/CD pipeline, or in a Kubernetes gatekeeper.
