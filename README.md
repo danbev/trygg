@@ -120,14 +120,21 @@ easier?
 
 #### How can I avoid mixing incompatible licenses?
 Again, we could create another policy that checks this.
+For Rust we can get the content of Cargo.toml as json and then input that into
+our policy rule:
+```console
+$ cargo metadata --format-version=1
+```
+For Node.js package.json is already in json format and could be used as input
+for a policy rule.
 
 #### What about other non-supported dependencies?
-It will/would be great if we use in-toto or something the verify that software
+It will/would be great if we use in-toto or something to verify that software
 coming from Red Hat is secure. But a large number of dependencies in a project
 will not come from Red Hat. Even if I as a user verify all of the Red Hat deps
 I'm still vulnerable software supply-chain attacks from other dependencies.
 
-Perhaps I'm being naive here but could we start helping open source projects,
+Perhaps I'm being naive here, but could we start helping open source projects,
 like the ones that are most used by our customers and help them setup in-toto
 or something else. I understand that this would cost us money but it would help
 our customers secure thier products and also might give a good amount of good
