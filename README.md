@@ -63,3 +63,29 @@ Options:
   -h, --help                       Print help information
   -V, --version                    Print version information
 ```
+
+### cargo tools
+As a developer checking the policies of dependencies might be run as a cargo
+thrird party command, something like:
+```console
+$ cargo r -q --bin cargo-license-check -- --input=examples/licenses-input.txt
+Evaluating:
+policy_name: license-check
+input: [{"name":"MIT Licence"},{"name":"Apache-License 2.0"},{"name":"something"}]
+data: {}
+Result:
+[{"result":true}]
+```
+
+```console
+$ cargo r -q --bin cargo-license-check -- --help
+cargo-license-check is a tool that checks license of dependencies according to...
+
+Usage: cargo-license-check [OPTIONS]
+
+Options:
+  -i, --input <INPUT>  The input file in json format (optional)
+  -d, --data <DATA>    The data file in json format (optional)
+  -h, --help           Print help information
+  -V, --version        Print version informatio
+```

@@ -18,3 +18,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "trygg"
 path = "src/main.rs"
+
+[[bin]]
+name = "cargo-license-check"
+path = "src/bin/cargo-license-check.rs"
