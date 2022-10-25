@@ -41,7 +41,7 @@ policies directory.
 After building the policy in the previous step we can evaluate the policy
 against some [input](./examples/licenses-input.txt):
 ```console
-$ cargo r -q -- --wasm=policies/license.wasm --entry-point=license/allow --input=examples/licenses-input.txt
+$ cargo r -q --bin=trygg -- --wasm=policies/license.wasm --entry-point=license/allow --input=examples/licenses-input.txt
 
 Evaluating:
 policy_name: None
