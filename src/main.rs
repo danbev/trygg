@@ -20,14 +20,6 @@ struct Args {
 
     #[arg(short, long, help = "The data file in json format (optional)")]
     data: Option<String>,
-
-    #[arg(
-        short,
-        long,
-        help = "The name of the policy to be run",
-        default_value = "None"
-    )]
-    policy_name: Option<String>,
 }
 
 fn main() {
@@ -40,11 +32,5 @@ fn main() {
     let data = args
         .data
         .map_or(String::from("{}"), |p| fs::read_to_string(p).unwrap());
-    evaluate(
-        &wasm,
-        &args.entry_point,
-        &input,
-        &data,
-        args.policy_name.unwrap(),
-    );
+    evaluate(&wasm, &args.entry_point, &input, &data);
 }

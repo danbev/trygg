@@ -8,8 +8,11 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.0.13", features = ["derive"] }
 policy-evaluator = {git = "https://github.com/kubewarden/policy-evaluator"}
-k8s-openapi = { version = "0.15.0", default-features = false, features = ["v1_24"] }
+k8s-openapi = { version = "0.16.0", default-features = false, features = ["v1_24"] }
 serde_json = "1.0.85"
+
+[dev-dependencies]
+k8s-openapi = { version = "0.16.0", default-features = false, features = ["v1_24"] }
 
 [lib]
 name = "lib"

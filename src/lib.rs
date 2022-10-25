@@ -1,23 +1,15 @@
-use policy_evaluator::burrego::opa::wasm::Evaluator;
-use policy_evaluator::runtimes::burrego::DEFAULT_HOST_CALLBACKS;
+use policy_evaluator::burrego::Evaluator;
 
-pub fn evaluate(
-    wasm: &Vec<u8>,
-    entry_point: &String,
-    input: &String,
-    data: &String,
-    policy_name: String,
-) {
+pub fn evaluate(wasm: &Vec<u8>, entry_point: &String, input: &String, data: &String) {
     let input: serde_json::Value =
         serde_json::from_str(&input).expect("input json does not have correct format.");
     let data: serde_json::Value =
         serde_json::from_str(&data).expect("data json does not have correct format.");
 
     println!("Evaluating:");
-    println!("policy_name: {}", policy_name);
     println!("input: {}", input);
     println!("data: {}", data);
-    let mut evaluator = Evaluator::new(policy_name, wasm, &DEFAULT_HOST_CALLBACKS).unwrap();
+    let mut evaluator = Evaluator::new(wasm, Default::default()).unwrap();
     let entrypoint_id = evaluator.entrypoint_id(entry_point).unwrap();
     let ret = evaluator.evaluate(entrypoint_id, &input, &data).unwrap();
     println!("Result:");

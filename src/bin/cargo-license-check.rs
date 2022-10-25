@@ -27,6 +27,5 @@ fn main() {
     let data = args
         .data
         .map_or(String::from("{}"), |p| fs::read_to_string(p).unwrap());
-    let policy_name = String::from("license-check");
-    evaluate(&wasm, &entry_point, &input, &data, policy_name);
+    evaluate(&wasm, &entry_point, &input, &data);
 }
