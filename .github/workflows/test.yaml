@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: cargo b --verbose
+
+      - name: Run Tests
+        run: cargo t --verbose -- --show-output
