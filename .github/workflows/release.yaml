@@ -28,3 +28,9 @@ jobs:
       - name: Print Cosign version
         run: |
           cosign version
+          echo "dummy file" > firmware.txt
+          cosign 
+
+      - name: Generate keypair
+        run: |
+          cargo r --bin keygen
