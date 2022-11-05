@@ -6,17 +6,17 @@ env:
   COSIGN_EXPERIMENTAL: 1
 
 jobs: 
-  build: 
-    runs-on: ubuntu-20.04
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v3.0.0
+  #build: 
+  #  runs-on: ubuntu-20.04
+  #  steps: 
+  #   - name: Checkout
+  #     uses: actions/checkout@v3.0.0
 
-      - name: Build
-        run: cargo b --verbose
+  #   - name: Build
+  #     run: cargo b --verbose
 
-      - name: Test
-        run: cargo t --verbose -- --show-output
+  #   - name: Test
+  #     run: cargo t --verbose -- --show-output
 
   sign:
     runs-on: ubuntu-20.04
