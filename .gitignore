@@ -1,1 +1,3 @@
-/target
+target
+cosign.key
+cosign.pub
