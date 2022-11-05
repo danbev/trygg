@@ -12,6 +12,11 @@ jobs:
       packages: write
       id-token: write
     steps:
+      - name: Install in-toto
+        run: |
+          pip install in-toto
+          in-toto-sign --version
+    steps:
       - name: Install Cosign
         uses: sigstore/cosign-installer@v2.1.0
         with:
