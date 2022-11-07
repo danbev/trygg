@@ -20,5 +20,7 @@ async fn main() {
         fs::write("cosign.key", private_key_pem).expect("Could not write private key");
         let public_key_pem = keypair.public_key_to_pem().unwrap();
         fs::write("cosign.pub", public_key_pem).expect("Could not write public key");
+    } else {
+        println!("was not able to create keypair");
     }
 }
