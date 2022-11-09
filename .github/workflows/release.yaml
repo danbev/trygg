@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     permissions:
       packages: write
-      id-token: write, read
+      id-token: write|read
     steps:
       - name: Checkout
         uses: actions/checkout@v2
