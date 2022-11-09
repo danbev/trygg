@@ -4188,6 +4188,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "k8s-openapi",
+ "openidconnect",
  "policy-evaluator",
  "serde_json",
  "sigstore",
