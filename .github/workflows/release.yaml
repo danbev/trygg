@@ -4,6 +4,7 @@ on: push
 
 env:
   COSIGN_EXPERIMENTAL: 1
+    GITSIGN_CONNECTOR_ID: https://github.com/login/oauth
 
 jobs: 
   sign:
@@ -29,14 +30,8 @@ jobs:
         run: |
           cosign version
 
-      - name: Login to ghcr.io
-        uses: docker/login-action@v1.14.1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Generate keypair
         run: |
+          echo "${{ secrets.GITHUB_TOKEN }}"
           cargo r --bin keygen
           ls -l cosign.key cosign.pub
