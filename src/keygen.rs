@@ -1,5 +1,6 @@
 use openidconnect::core::CoreIdToken;
 use sigstore::crypto::SigningScheme;
+use sigstore::fulcio::oauth::OauthTokenProvider;
 use sigstore::fulcio::{FulcioClient, TokenProvider, FULCIO_ROOT};
 use std::env;
 use std::fs;
@@ -9,13 +10,13 @@ use url::Url;
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = env::args().collect();
-    let t = &args[1];
-    fs::write("token.text", t).expect("Could not write the token");
-    let id_token: CoreIdToken = CoreIdToken::from_str(t).unwrap();
-    println!("id_token: {:?}", id_token);
-    let token_provider = TokenProvider::Static((id_token, "??".to_string()));
-    //let tp = OauthTokenProvider::default();
-    //let fulcio = FulcioClient::new(Url::parse(FULCIO_ROOT).unwrap(), TokenProvider::Oauth(tp));
+    let token_provider = match args.len() {
+        2 => {
+            let id_token: CoreIdToken = CoreIdToken::from_str(&args[1]).unwrap();
+            TokenProvider::Static((id_token, "keygen".to_string()))
+        }
+        _ => TokenProvider::Oauth(OauthTokenProvider::default()),
+    };
     let fulcio = FulcioClient::new(Url::parse(FULCIO_ROOT).unwrap(), token_provider);
 
     if let Ok((signer, _cert)) = fulcio
