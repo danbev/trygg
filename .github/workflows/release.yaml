@@ -9,8 +9,8 @@ jobs:
   sign:
     runs-on: ubuntu-20.04
     permissions:
-      packages: write
-      id-token: write|read
+      id-token: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
