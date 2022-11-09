@@ -1,23 +1,22 @@
-use openidconnect::core::{CoreIdTokenFields, CoreTokenResponse, CoreTokenType};
-use openidconnect::{AccessToken, EmptyExtraTokenFields};
+use openidconnect::core::CoreIdToken;
 use sigstore::crypto::SigningScheme;
-use sigstore::fulcio::oauth::OauthTokenProvider;
 use sigstore::fulcio::{FulcioClient, TokenProvider, FULCIO_ROOT};
 use std::env;
 use std::fs;
+use std::str::FromStr;
 use url::Url;
 
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = env::args().collect();
     let t = &args[1];
-    println!("token: {}", t);
     fs::write("token.text", t).expect("Could not write the token");
-    //let tok = TokenProvider::Static(CoreTokenType::new("bajja".to_string));
-    //let tp = OauthTokenProvider::default().with_issuer("https://github.com/login/oauth");
-    let tp = OauthTokenProvider::default();
-    //let tp = OauthTokenProvider::default().with_issuer("https://github.com/login/oauth");
-    let fulcio = FulcioClient::new(Url::parse(FULCIO_ROOT).unwrap(), TokenProvider::Oauth(tp));
+    let id_token: CoreIdToken = CoreIdToken::from_str(t).unwrap();
+    println!("id_token: {:?}", id_token);
+    let token_provider = TokenProvider::Static((id_token, "??".to_string()));
+    //let tp = OauthTokenProvider::default();
+    //let fulcio = FulcioClient::new(Url::parse(FULCIO_ROOT).unwrap(), TokenProvider::Oauth(tp));
+    let fulcio = FulcioClient::new(Url::parse(FULCIO_ROOT).unwrap(), token_provider);
 
     if let Ok((signer, _cert)) = fulcio
         .request_cert(SigningScheme::ECDSA_P256_SHA256_ASN1)
