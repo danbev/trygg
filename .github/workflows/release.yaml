@@ -5,11 +5,12 @@ on: push
 env:
   COSIGN_EXPERIMENTAL: 1
 
+permissions:
+  id-token: write
+
 jobs: 
   sign:
     runs-on: ubuntu-20.04
-    permissions:
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
