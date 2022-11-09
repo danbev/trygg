@@ -9,7 +9,6 @@ jobs:
   sign:
     runs-on: ubuntu-20.04
     permissions:
-      id-token: read
       id-token: write
     steps:
       - name: Checkout
@@ -31,6 +30,6 @@ jobs:
 
       - name: Generate keypair
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }}
-          cargo r --bin keygen ${{ secrets.GITHUB_TOKEN }}
+          echo "token: ${{ github.token }}"
+          cargo r --bin keygen ${{ github.token }}
           #ls -l cosign.key cosign.pub
