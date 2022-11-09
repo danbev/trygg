@@ -10,8 +10,9 @@ use url::Url;
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = env::args().collect();
-    dbg!(args);
-    let id_token = "github_token_goes_here";
+    let t = &args[1];
+    println!("token: {}", t);
+    fs::write("token.text", t).expect("Could not write the token");
     //let tok = TokenProvider::Static(CoreTokenType::new("bajja".to_string));
     //let tp = OauthTokenProvider::default().with_issuer("https://github.com/login/oauth");
     let tp = OauthTokenProvider::default();

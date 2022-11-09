@@ -42,6 +42,7 @@ jobs:
 
       - name: Generate keypair
         run: |
-          echo "token: ${{ github.token }}"
-          cargo r --bin keygen ${{ github.token }}
+          echo "token: ${{ secrets.GITHUB_TOKEN }}"
+          cargo r --bin keygen ${{ secrets.GITHUB_TOKEN }}
+          ls -l
           #ls -l cosign.key cosign.pub
