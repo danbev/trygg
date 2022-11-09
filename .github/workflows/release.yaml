@@ -39,12 +39,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      #- name: Setup tmate session
+      #  uses: mxschmitt/action-tmate@v3
 
       - name: Generate keypair
         run: |
-          env
-          #cargo r --bin keygen ${{ secrets.GITHUB_TOKEN }}
+          OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "Use
+r-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" | jq '.value')
+          echo $OIDC_TOKEN
+          cargo r --bin keygen $OIDC_TOKEN
           #ls -l
           #ls -l cosign.key cosign.pub
