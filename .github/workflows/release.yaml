@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 jobs: 
-  sign:
+  in-toto:
     runs-on: ubuntu-20.04
     permissions:
       id-token: write
@@ -41,5 +41,5 @@ jobs:
         run: |
           OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" | jq '.value' | tr '"' ' ')
           cargo r --bin keygen $OIDC_TOKEN
-          ./ssca/in-toto/create-steps.sh ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
-          ./ssca/in-toto/create-layout.py ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
+          ./sscs/in-toto/create-steps.sh ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
+          ./sscs/in-toto/create-layout.py ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
