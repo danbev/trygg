@@ -21,7 +21,7 @@ jobs:
       - name: Install in-toto
         run: |
           # Install in-toto version with support for ecdsa
-          pip install git+https://github.com/danbev/in-toto.git@ecdsa-support
+          pip install git+https://github.com/in-toto/in-toto.git@develop
           #pip install in-toto
           in-toto-sign --version
 
@@ -40,6 +40,5 @@ jobs:
       - name: Generate keypair
         run: |
           OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" | jq '.value' | tr '"' ' ')
-          cargo r --bin keygen $OIDC_TOKEN
-          ./sscs/in-toto/create-steps.sh ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
-          ./sscs/in-toto/create-layout.py ${{ github.repository.owner }} ${{ github.repository.name }} cosign.key cosign.pub
+          ls -l 
+          ./sscs/in-toto/workflow.sh ${{ github.repository.owner }} ${{ github.repository.name }} $OIDC_TOKEN
