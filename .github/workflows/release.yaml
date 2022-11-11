@@ -51,6 +51,6 @@ jobs:
         working-directory: sscs/in-toto
         run: |
           echo ${{ steps.keygen.outputs.oidc_token }}
-          #./workflow.sh ${{ github.repository.owner }} \
-          #  ${{ github.repository.name }} \
-          #  ${{ steps.keygen.outputs.oidc_token }}
+          ./workflow.sh ${{ github.repository.owner }} \
+            ${{ github.repository.name }} \
+            ${{ steps.keygen.outputs.oidc_token }}
