@@ -39,8 +39,8 @@ jobs:
       #- name: Setup tmate session
       #  uses: mxschmitt/action-tmate@v3
 
-      - name: Generate keypair
-        id: keygen
+      - name: Generate OIDC Token
+        id: token
         run: |
           echo oidc_token=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" \
             -H "User-Agent: actions/oidc-client" \
@@ -50,7 +50,4 @@ jobs:
       - name: in-toto process
         working-directory: sscs/in-toto
         run: |
-          echo ${{ steps.keygen.outputs.oidc_token }}
-          ./workflow.sh ${{ github.repository.owner }} \
-            ${{ github.repository.name }} \
-            ${{ steps.keygen.outputs.oidc_token }}
+          ./workflow.sh ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ steps.token.outputs.oidc_token }}
