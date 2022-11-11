@@ -48,7 +48,6 @@ jobs:
             | jq '.value' | tr '"' ' ') >> $GITHUB_OUTPUT
 
       - name: in-toto process
-        needs: keygen
         working-directory: sscs/in-toto
         run: |
           echo ${{ steps.keygen.outputs.oidc_token }}
