@@ -41,5 +41,5 @@ jobs:
         run: |
           OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" | jq '.value' | tr '"' ' ')
           ls -l 
-          pushd sssc/in-toto
+          pushd sscs/in-toto
           ./workflow.sh ${{ github.repository.owner }} ${{ github.repository.name }} $OIDC_TOKEN
