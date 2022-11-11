@@ -142,12 +142,19 @@ our customers secure thier products and also might give a good amount of good
 will from the community.
 
 ## Github Action
-This repository has an example of a github action workflow that uses cosign and
-in-toto to sign artifacts. This is mainly for experimenting.
+This repository has an example of a github action workflow that uses `cosign`
+and `in-toto` to sign artifacts. This is mainly for experimenting and understand
+how to tool like in-toto might be used in combination with sigstore, to avoid
+the problem with key management. If projects are going to begin signing and
+creating attestations this cannot be a manual task.
+
+We are not claiming that this is possible, at least not yet as the verfification
+that in-toto performs does not reach out to `Sigstore`'s transparency log
+`Rekor`.  But we have to start somewhere which is the reason for doing this.
 
 Currently, what the [workflow](./.github/workflows/release.yaml) does is it
-uses github OIDC Provider to get an access token which is then used to retrieve
-a keypair from cosign's `Fulcio`.
+uses `Github`'s OIDC Provider to get an access token which is then used to
+retrieve a keypair from `Sigstore's `Fulcio`.
 
 This keypair is then use with `in-toto` to create [steps](./sscs/in-toto/create-steps.sh)
 and a [layout](./sscs/in-toto/create-layout.py). The workflow currently
