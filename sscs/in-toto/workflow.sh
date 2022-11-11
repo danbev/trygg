@@ -10,12 +10,17 @@ GITHUB_TOKEN=$3
 PRIVATE_KEY=cosign.key
 PUBLIC_KEY=${PRIVATE_KEY}.pub.json
 
+
+echo "workflow.sh arguments: $GITHUB_ORG $GITHUB_PROJECT $GITHUB_TOKEN"
+
 ## First generate the keypair to be used when signing
 echo "Generate keypair"
 if [ -z $GITHUB_TOKEN ]; then
+	echo "without token...."
 	cargo r --manifest-path=../../Cargo.toml --bin keygen
 else
-	cargo r --manifest-path=../../Cargo.toml --bin keygen ${GITHUB_TOKEN}
+	echo "with token...."
+	cargo r --manifest-path=../../Cargo.toml --bin keygen $GITHUB_TOKEN
 fi
 
 # Create keys in securesystemslib json key format. This will generate two
