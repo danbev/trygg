@@ -1,4 +1,4 @@
-name: SSCS
+name: SSCS Workflow
 
 on: push 
 
@@ -21,7 +21,9 @@ jobs:
       - name: Install in-toto
         run: |
           # Install in-toto version with support for ecdsa
+          # (https://github.com/in-toto/in-toto/issues/519).
           pip install git+https://github.com/in-toto/in-toto.git@develop
+          # When a new release of in-toto is available just use:
           #pip install in-toto
           in-toto-sign --version
 
@@ -38,8 +40,18 @@ jobs:
       #  uses: mxschmitt/action-tmate@v3
 
       - name: Generate keypair
+        id: keygen
         run: |
-          OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" | jq '.value' | tr '"' ' ')
-          ls -l 
-          pushd sscs/in-toto
-          ./workflow.sh ${{ github.repository.owner }} ${{ github.repository.name }} $OIDC_TOKEN
+          echo oidc_token=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" \
+            -H "User-Agent: actions/oidc-client" \
+            -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            | jq '.value' | tr '"' ' ') >> $GITHUB_OUTPUT
+
+      - name: in-toto process
+        needs: keygen
+        working-directory: sscs/in-toto
+        run: |
+          echo ${{ steps.keygen.outputs.oidc_token }}
+          #./workflow.sh ${{ github.repository.owner }} \
+          #  ${{ github.repository.name }} \
+          #  ${{ steps.keygen.outputs.oidc_token }}
