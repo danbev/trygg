@@ -25,7 +25,7 @@ fi
 # Create keys in securesystemslib json key format. This will generate two
 # files: <keyname>.key.json and <keyname>.key..pub.json
 echo "Import and convert cosign keys to securesystemslib json format"
-./import_ecsda_key.py $PRIVATE_KEY
+./in-toto-key-import.py $PRIVATE_KEY
 
 mkdir -p artifacts
 echo "Create layout"
