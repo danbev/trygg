@@ -1,21 +1,11 @@
 #!/usr/bin/python3
 
 import sys
-from pathlib import Path
-
-import hashlib
-import securesystemslib.ecdsa_keys
 import json
 
-from ecdsa import SigningKey, VerifyingKey
-from ecdsa.util import sigencode_der, sigdecode_der
-
-from securesystemslib import interface
-from securesystemslib.interface import *
+from securesystemslib.interface import import_publickeys_from_file
 from in_toto.models.layout import Layout
 from in_toto.models.metadata import Metablock
-
-KEYS = securesystemslib.keys
 
 def process(github_org, github_project, private_key_file, public_key_file):
   print(f"Processing https://github.com/{github_org}/{github_project}.git")
